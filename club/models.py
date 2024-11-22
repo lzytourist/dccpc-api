@@ -51,3 +51,27 @@ class Member(models.Model):
         verbose_name_plural = 'Members'
         db_table = 'club_members'
         ordering = ['-created_at']
+
+
+class PanelMember(models.Model):
+    name = models.CharField(max_length=150)
+    image = models.ImageField(
+        upload_to='panel_members/',
+        validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])]
+    )
+    designation = models.CharField(max_length=100)
+    linkedin = models.CharField(max_length=255, null=True, blank=True)
+    github = models.CharField(max_length=255, null=True, blank=True)
+    facebook = models.CharField(max_length=255, null=True, blank=True)
+    ordering = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Panel Member'
+        verbose_name_plural = 'Panel Members'
+        db_table = 'club_panel_members'
+        ordering = ['ordering']
