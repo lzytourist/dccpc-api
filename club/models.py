@@ -22,16 +22,24 @@ class Gallery(models.Model):
 
 
 class Member(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=150)
     image = models.ImageField(
         upload_to='members/',
         validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])]
     )
-    designation = models.CharField(max_length=255)
+    batch = models.IntegerField(default=0)
+    education = models.CharField(max_length=100)
+    roll = models.IntegerField(default=0)
+    phone = models.CharField(max_length=20)
+    email = models.CharField(max_length=150)
+    problem_solving_experience = models.CharField(max_length=255)
+    expectation = models.CharField(max_length=255)
+    joined_date = models.DateField(null=True)
     facebook = models.CharField(max_length=255, null=True, blank=True)
     instagram = models.CharField(max_length=255, null=True, blank=True)
     twitter = models.CharField(max_length=255, null=True, blank=True)
     linkedin = models.CharField(max_length=255, null=True, blank=True)
+    transaction_id = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
