@@ -1,7 +1,8 @@
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 
-from club.models import Member, Gallery, PanelMember
-from club.serializers import MemberSerializer, GallerySerializer, PanelMemberSerializer
+from club.models import Member, Gallery, PanelMember, Event, ContactRequest
+from club.serializers import MemberSerializer, GallerySerializer, PanelMemberSerializer, EventSerializer, \
+    ContactRequestSerializer
 
 
 class MemberCreateAPIView(CreateAPIView):
@@ -17,3 +18,18 @@ class GalleryListAPIView(ListAPIView):
 class PanelMemberListAPIView(ListAPIView):
     serializer_class = PanelMemberSerializer
     queryset = PanelMember.objects.all()
+
+
+class EventListAPIView(ListAPIView):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
+
+
+class EventRetrieveAPIView(RetrieveAPIView):
+    serializer_class = EventSerializer
+    queryset = Event.objects.all()
+
+
+class ContactCreateAPIView(CreateAPIView):
+    serializer_class = ContactRequestSerializer
+    queryset = ContactRequest.objects.all()

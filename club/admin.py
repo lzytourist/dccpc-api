@@ -2,7 +2,7 @@ import datetime
 
 from django.contrib import admin
 
-from .models import Gallery, Member, PanelMember
+from .models import Gallery, Member, PanelMember, Event, ContactRequest
 
 
 @admin.register(Gallery)
@@ -67,3 +67,14 @@ class PanelMemberAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         })
     )
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at')
+
+
+@admin.register(ContactRequest)
+class ContactRequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone')
+    empty_value_display = '-empty-'

@@ -75,3 +75,32 @@ class PanelMember(models.Model):
         verbose_name_plural = 'Panel Members'
         db_table = 'club_panel_members'
         ordering = ['ordering']
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    details = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
+        db_table = 'club_events'
+        ordering = ['-created_at']
+
+
+class ContactRequest(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Contact Request'
+        verbose_name_plural = 'Contact Requests'
+        db_table = 'club_contact_requests'
+        ordering = ['-created_at']

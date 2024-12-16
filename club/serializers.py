@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from club.models import Member, Gallery, PanelMember
+from club.models import Member, Gallery, PanelMember, Event, ContactRequest
 
 
 class MemberSerializer(serializers.ModelSerializer):
@@ -20,3 +20,14 @@ class PanelMemberSerializer(serializers.ModelSerializer):
         model = PanelMember
         fields = '__all__'
 
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+
+class ContactRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactRequest
+        fields = '__all__'
