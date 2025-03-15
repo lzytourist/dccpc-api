@@ -2,7 +2,14 @@ import datetime
 
 from django.contrib import admin
 
-from .models import Gallery, Member, PanelMember, Event, ContactRequest
+from .models import (
+    Gallery,
+    Member,
+    PanelMember,
+    Event,
+    ContactRequest,
+    Notice
+)
 
 
 @admin.register(Gallery)
@@ -35,7 +42,7 @@ class MemberAdmin(admin.ModelAdmin):
             'fields': ('problem_solving_experience', 'expectation', 'joined_date')
         }),
         ('Social Media', {
-            'fields': ('facebook', 'instagram', 'twitter', 'linkedin'),
+            'fields': ('facebook', 'github', 'linkedin'),
             'classes': ('collapse',)  # Collapsible section
         }),
         ('Payment Details', {
@@ -77,4 +84,10 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(ContactRequest)
 class ContactRequestAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone')
+    empty_value_display = '-empty-'
+
+
+@admin.register(Notice)
+class NoticeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'file', 'created_at')
     empty_value_display = '-empty-'

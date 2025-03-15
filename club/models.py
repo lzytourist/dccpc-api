@@ -36,9 +36,8 @@ class Member(models.Model):
     expectation = models.CharField(max_length=255)
     joined_date = models.DateField(null=True)
     facebook = models.CharField(max_length=255, null=True, blank=True)
-    instagram = models.CharField(max_length=255, null=True, blank=True)
-    twitter = models.CharField(max_length=255, null=True, blank=True)
     linkedin = models.CharField(max_length=255, null=True, blank=True)
+    github = models.CharField(max_length=255, null=True, blank=True)
     transaction_id = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -104,3 +103,19 @@ class ContactRequest(models.Model):
         verbose_name_plural = 'Contact Requests'
         db_table = 'club_contact_requests'
         ordering = ['-created_at']
+
+
+class Notice(models.Model):
+    title = models.CharField(max_length=255)
+    details = models.TextField(null=True, blank=True)
+    file = models.FileField(
+        validators=[FileExtensionValidator(['png', 'jpg', 'jpeg', 'pdf', 'docx', 'doc'])],
+        null=True,
+        blank=True,
+        upload_to='notices/'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
