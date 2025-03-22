@@ -1,5 +1,6 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from tinymce.models import HTMLField
 
 
 class Gallery(models.Model):
@@ -78,7 +79,12 @@ class PanelMember(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
-    details = models.TextField(null=True, blank=True)
+    image = models.FileField(
+        validators=[FileExtensionValidator(['png', 'jpg', 'jpeg'])],
+        upload_to='events/',
+        null=True
+    )
+    details = HTMLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -119,3 +125,8 @@ class Notice(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = 'Notice'
+        verbose_name_plural = 'Notices'
+        ordering = ['-created_at']

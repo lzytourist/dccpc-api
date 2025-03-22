@@ -4,6 +4,12 @@ from club.models import Member, Gallery, PanelMember, Event, ContactRequest, Not
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    def validate(self, attrs):
+        email = attrs.get('email')
+        if Member.objects.filter(email=email).exists():
+            raise serializers.ValidationError({'email': ['Email already registered']})
+        return attrs
+
     class Meta:
         model = Member
         fields = '__all__'
